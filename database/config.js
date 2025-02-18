@@ -1,13 +1,15 @@
+require('dotenv').config({ path: '.env.development' });
+
 const { DataSource } = require("typeorm");
 const { AdmUsers } = require("./entities/admUserEntity");
 
 const AppDataSource = new DataSource({
     type: "mssql",
-    username: "dbadmin",
-    password: "d&5atsUWQg#M$L",
-    host: "hierd-infobridge-dev.c2l7libqnlvn.us-east-1.rds.amazonaws.com", // Ensure correct SQL instance name
-    port: 1433,
-    database: "FHWA_INFOARCHIVE",
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT),
+    database: process.env.DB_DATABASE,
     synchronize: false,
     entities: [AdmUsers],
     options: {
